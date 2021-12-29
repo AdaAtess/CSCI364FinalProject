@@ -12,28 +12,13 @@ top = 6;
 hSmallCyl1 = height/50;
 hSmallCyl2 = height/30;
 
-
 stackCylinder([
     [height, bottom, top, numFacets],
     [hSmallCyl1, top + 0.5, top + 0.5, numFacets*3],
     [hSmallCyl2, bottom, top, numFacets*3]
 ]);
 
-// translate([0,0,0]) 
-// {
-//     cylinder(h = height, d1 = bottom, d2 = top, $fn = numFacets);
-// };
-
-// translate([0,0,height]) 
-// {
-//     cylinder(h = hSmallCyl1, d1 = top + 0.5, d2 = top + 0.5, $fn = numFacets*3);
-// };
-
-// translate([0,0,height + hSmallCyl1]) 
-// {
-//     cylinder(h = hSmallCyl2, d1 = top, d2 = bottom, $fn = numFacets*3);
-// };
-
+// Small cube on top
 x = bottom;
 y = x;
 z = 1.5;
