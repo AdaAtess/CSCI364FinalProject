@@ -15,10 +15,10 @@ hSmallCyl2 = height/30;
 stackCylinder([
     [height, bottom, top, numFacets],
     [hSmallCyl1, top + 0.5, top + 0.5, numFacets*3],
-    [hSmallCyl2, bottom, top, numFacets*3]
+    [hSmallCyl2, top, bottom, numFacets*3]
 ]);
 
-// Small cube on top
+// small cube on top
 x = bottom;
 y = x;
 z = 1.5;
