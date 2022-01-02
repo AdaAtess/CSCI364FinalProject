@@ -1,7 +1,7 @@
 $fa = 1;
 $fs = 0.4;
 $fn=64;
-pipebend (10,2,172,53);
+pipebend (10,2,169,44);
 
 module pipebend (thickness, id, od, ang) 
 rotate([0,-90,0]){
@@ -53,7 +53,7 @@ top = 6;
 hSmallCyl1 = height/50;
 hSmallCyl2 = height/30;
 
-translate([0,-23,0]){
+translate([0,-18,0]){
 stackCylinder([
     [height, bottom, top, numFacets],
     [hSmallCyl1, top + 0.5, top + 0.5, numFacets*3],
@@ -71,7 +71,7 @@ translate([centeringCube, centeringCube, height + + hSmallCyl1 + hSmallCyl2])
 };
 }
 
-translate([0,23,0]){
+translate([0,18,0]){
 stackCylinder([
     [height, bottom, top, numFacets],
     [hSmallCyl1, top + 0.5, top + 0.5, numFacets*3],
