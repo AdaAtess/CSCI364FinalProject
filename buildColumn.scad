@@ -33,4 +33,4 @@ translate([centeringCube, centeringCube, height + hSmallCyl1 + hSmallCyl2])
     cube(size = [x,y,z]);
 };
 }
-// ********* End of Module ***********
+// ********* End of Column Module ***********
