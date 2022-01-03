@@ -6,14 +6,14 @@ module stackCylinder(vector, i = 0) {
 }
 
 
-height = 50;
-bottomDiameter = 8;
-topDiameter = 6;
-column(height, bottomDiameter, topDiameter);
+height = 23;
+bottomDiameter = 10;
+column(height, bottomDiameter);
 
 // ********* Column Module ***********
-module column(height, bottomDiameter, topDiameter) {
+module column(height, bottomDiameter) {
 numFacets = 30;
+topDiameter = bottomDiameter * 3/4;
 hSmallCyl1 = height/50;
 hSmallCyl2 = height/30;
 
