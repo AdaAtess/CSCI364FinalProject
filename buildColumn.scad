@@ -5,21 +5,26 @@ module stackCylinder(vector, i = 0) {
     }
 }
 
-numFacets = 30;
+
 height = 50;
-bottom = 8;
-top = 6;
+bottomDiameter = 8;
+topDiameter = 6;
+column(height, bottomDiameter, topDiameter);
+
+// ********* Column Module ***********
+module column(height, bottomDiameter, topDiameter) {
+numFacets = 30;
 hSmallCyl1 = height/50;
 hSmallCyl2 = height/30;
 
 stackCylinder([
-    [height, bottom, top, numFacets],
-    [hSmallCyl1, top + 0.5, top + 0.5, numFacets*3],
-    [hSmallCyl2, top, bottom, numFacets*3]
+    [height, bottomDiameter, topDiameter, numFacets],
+    [hSmallCyl1, topDiameter + 0.5, topDiameter + 0.5, numFacets*3],
+    [hSmallCyl2, topDiameter, bottomDiameter, numFacets*3]
 ]);
 
-// small cube on top
-x = bottom;
+// flat cube on top
+x = bottomDiameter;
 y = x;
 z = 1.5;
 centeringCube = -x/2;
@@ -27,4 +32,5 @@ translate([centeringCube, centeringCube, height + hSmallCyl1 + hSmallCyl2])
 {
     cube(size = [x,y,z]);
 };
-
+}
+// ********* End of Module ***********
