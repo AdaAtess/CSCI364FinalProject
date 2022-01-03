@@ -23,7 +23,7 @@ x = bottom;
 y = x;
 z = 1.5;
 centeringCube = -x/2;
-translate([centeringCube, centeringCube, height + + hSmallCyl1 + hSmallCyl2]) 
+translate([centeringCube, centeringCube, height + hSmallCyl1 + hSmallCyl2]) 
 {
     cube(size = [x,y,z]);
 };
