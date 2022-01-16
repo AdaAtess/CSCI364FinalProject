@@ -103,5 +103,5 @@ print("new generation")
 for c in newPop:
     print(c.fitnessVal)'''
 
-#pairsParents=selectParents(population, 4, 12)
+# pairsParents=selectParents(population, 4, 12)
 

@@ -9,6 +9,9 @@
 # - turret 5
 # - courtyard/pond area 6
 
+# combination of modules
+# ex) 4 cols on one side, wall on the other side
+
 import random
 
 class Chromosome:
@@ -19,6 +22,12 @@ class Chromosome:
     def __lt__(self, other):
         return self.fitnessVal<other.fitnessVal
 
+def fitness(moduleList):
+    sum = 0
+    for num in moduleList:
+        sum += num
+    return sum
+
 def initPopulation():
     # list of lists
     chromosomeList = []
@@ -28,18 +37,23 @@ def initPopulation():
 
     # 3 hardcoded buildings
     c1 = Chromosome(building1)
+    c1.fitnessVal = fitness(building1)
     c2 = Chromosome(building2)
+    c2.fitnessVal = fitness(building2)
     c3 = Chromosome(building3)
+    c3.fitnessVal = fitness(building3)
     chromosomeList.append(c1)
     chromosomeList.append(c2)
     chromosomeList.append(c3)
 
-    # 27 buildings
+    # 27 randomized buildings
+    i = 3
     for randBuilding in range(0,27):
         randomList = []
         for index in range (0,8):
             randomList.append(random.randrange(1, 6))
         c4 = Chromosome(randomList)
+        c4.fitnessVal = fitness(building3)    
         chromosomeList.append(c4)
     
     return chromosomeList

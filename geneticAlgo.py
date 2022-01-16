@@ -1,15 +1,28 @@
 # import the files from everybody
+from initPopulation import initPopulation, fitness
+from ParentSurvivorSelection import selectParents, makeNextGeneration
 
 # chromosome class - one chromosome is an entire building structure
 class Chromosome:
-    def __init__(self):
+    def __init__(self, moduleList):
         # list storing all the module numbers
-        self.moduleList = []
-        self.fitnessVal = None  # call fitness function
-        pass
+        self.moduleList = moduleList
+        self.fitnessVal = 0  # call fitness function
+    def __lt__(self, other):
+        return self.fitnessVal<other.fitnessVal
         # the number representing the module
         # the number identifying the cube it's in (figure out LATER)
-    pass
+
+population = initPopulation()
+for pop in population:
+    print(pop.moduleList)
+    print(pop.fitnessVal)
+
+pairsParents = selectParents(population, 4, 3)
+for pair in pairsParents:
+    print('\n')
+    print(pair[0].moduleList)
+    print(pair[1].moduleList)
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)
 
