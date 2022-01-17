@@ -43,9 +43,11 @@ def crossover(p1, p2, crossrate):
 
 #mutrate = 0.15
 def mutation(offspring, mutrate):
-    for index in range(8):
-        rand_value = random.randrange(1,6)
-        offspring[index,4] = offspring[index, 4] + rand_value
+    for index in range(8):      #for the length of the chromosome
+        p = random.random()     #get a probability
+        if p < mutrate:         #if lower than mutation rate
+            rand_value = random.randrange(1,6)      #choose a random gene/module
+            offspring[index,4] = offspring[index, 4] + rand_value       #add in the middle
     return offspring
 
 
