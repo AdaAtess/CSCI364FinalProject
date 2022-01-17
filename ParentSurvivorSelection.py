@@ -1,6 +1,7 @@
 #This file has the parent selection and survivor selection functions.
 #When combining, remember to add archive=[] early in the main program, outside any functions. 
 import random
+import copy
 class Chromosome:
     def __init__(self):
         # list storing all the module numbers
@@ -24,7 +25,8 @@ def selectParents(population, k, numKids):
     pairs=[]
     while len(pairs) < numKids: #within this loop, pick a pair and add it to the list
         thisPair=[]
-        tempPop=population.copy()
+        #tempPop=population.copy()
+        tempPop = copy.deepcopy(population)
         
         for parent in range (2):
             competitors=[]
@@ -40,7 +42,8 @@ def selectParents(population, k, numKids):
             thisPair.append(competitors[0])
 
             #Next two lines only necessary 1st time through, setting up for the 2nd parent so parents in a pair are unique
-            tempPop=population.copy()
+            #tempPop=population.copy()
+            tempPop = copy.deepcopy(population)
             tempPop.remove(thisPair[0])
 
         pairs.append(thisPair)
