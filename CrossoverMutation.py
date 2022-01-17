@@ -9,16 +9,16 @@ from initPopulation import calculateFitness
 from ParentSurvivorSelection import selectParents
 
 #crossrate = 0.27
-def crossover(p1, p2, crossrate):
+def crossover(p1, p2):
 
     c1 = copy.deepcopy(p1)
     c2 = copy.deepcopy(p2)
 
     p = random.random()
-    while p < crossrate:
-        position = random.randint(1, len(p1)-2)
-        c1 = p1[:position] + p2[position:]
-        c2 = p2[:position] + p1[position:]
+    #while p < crossrate:
+    position = random.randint(1, len(p1)-2)
+    c1 = p1[:position] + p2[position:]
+    c2 = p2[:position] + p1[position:]
 
     c1_f = calculateFitness(c1)
     c1.fitnessVal = c1_f
