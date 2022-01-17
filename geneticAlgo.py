@@ -1,6 +1,7 @@
 # import the files from everybody
 from initPopulation import initPopulation, calculateFitness
 from ParentSurvivorSelection import selectParents, makeNextGeneration
+from CrossoverMutation import crossover, mutation
 
 # chromosome class - one chromosome is an entire building structure
 class Chromosome:
@@ -14,17 +15,14 @@ class Chromosome:
         # the number identifying the cube it's in (figure out LATER)
 
 population = initPopulation()
-for pop in population:
-    print(pop.moduleList)
-    print(pop.fitnessVal)
+# for pop in population:
+#     print(pop.moduleList)
+#     print(pop.fitnessVal)
 
 pairsParents = selectParents(population, 4, 3)
 for pair in pairsParents:
-    print('\n')
-    print(pair[0].moduleList)
-    print(pair[0].fitnessVal)    
-    print(pair[1].moduleList)
-    print(pair[1].fitnessVal)
+    bestChild = crossover(pair[0], pair[1])
+    print(bestChild.fitnessVal)
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)
 

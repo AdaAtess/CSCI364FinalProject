@@ -8,23 +8,35 @@ import random
 from initPopulation import calculateFitness
 from ParentSurvivorSelection import selectParents
 
+class Chromosome:
+    def __init__(self, moduleList):
+        # list storing all the module numbers
+        self.moduleList = moduleList
+        self.fitnessVal = 0  # call fitness function
+    def __lt__(self, other):
+        return self.fitnessVal<other.fitnessVal
+        # the number representing the module
+        # the number identifying the cube it's in (figure out LATER)
+
 #crossrate = 0.27
 def crossover(p1, p2):
 
-    c1 = copy.deepcopy(p1)
-    c2 = copy.deepcopy(p2)
+    c1 = Chromosome(p1.moduleList)
+    c2 = Chromosome(p2.moduleList)
+    # c1 = copy.deepcopy(p1)
+    # c2 = copy.deepcopy(p2)
 
     p = random.random()
     #while p < crossrate:
-    position = random.randint(1, len(p1)-2)
-    c1 = p1[:position] + p2[position:]
-    c2 = p2[:position] + p1[position:]
+    position = random.randint(1, len(p1.moduleList)-2)
+    c1.moduleList = p1.moduleList[:position] + p2.moduleList[position:]
+    c2.moduleList = p2.moduleList[:position] + p1.moduleList[position:]
 
-    c1_f = calculateFitness(c1)
+    c1_f = calculateFitness(c1.moduleList)
     c1.fitnessVal = c1_f
 
-    c2_f = calculateFitness(c2)
-    c2.fitnessVal(c1_f)
+    c2_f = calculateFitness(c2.moduleList)
+    c2.fitnessVal = c2_f
 
     max_f = max(c1_f, c2_f)
     if max_f == c1_f:

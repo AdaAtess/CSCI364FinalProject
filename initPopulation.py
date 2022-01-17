@@ -61,8 +61,8 @@ def initPopulation():
     return chromosomeList
 
 population = initPopulation()
-for pop in population:
-    print(pop.moduleList)
+# for pop in population:
+#     print(pop.moduleList)
 
 # a chromosome is 8 cubes or 2x2x2 dimensions
 # position 1: 0,0,0 (x,y,z)/ start in the corner (1 cube)
