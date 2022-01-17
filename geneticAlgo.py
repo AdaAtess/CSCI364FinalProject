@@ -22,7 +22,9 @@ pairsParents = selectParents(population, 4, 3)
 for pair in pairsParents:
     print('\n')
     print(pair[0].moduleList)
+    print(pair[0].fitnessVal)    
     print(pair[1].moduleList)
+    print(pair[1].fitnessVal)
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)
 
