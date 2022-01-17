@@ -17,16 +17,42 @@ import random
 class Chromosome:
     def __init__(self, moduleList):
         # list storing all the module numbers
+        self.moduleIDs = [1,2,3,4,5,6,7,8,9,10]
         self.moduleList = moduleList
         self.fitnessVal = None  # call fitness function
+        self.fitnessPreference = None # preference dict
     def __lt__(self, other):
         return self.fitnessVal<other.fitnessVal
 
-def fitness(moduleList):
+def calculateFitness(moduleIDs, moduleList, fitnessPreference):
+    while user_input != 'exit':
+        instruction = """
+        [1: wall, 2: column, 3: turret, ...]
+        Please enter a castle feature ID, followed by a space  and its frequency of occurences.
+        To exit, enter "exit"
+        """
+        print(instruction)
+        user_input = input()
+        if (user_input == 'exit'):
+            break
+        else:
+            inputList = user_input.split()
+            feature = inputList[0]
+            featureFreq = inputList[1]
+            if feature in moduleIDs:
+                fitnessPreference[feature] = featureFreq    
+    
     sum = 0
-    for num in moduleList:
-        sum += num
+    for id in moduleIDs:
+        idFreq = 0
+        for num in moduleList:
+            if id == num:
+                idFreq += 1
+        if idFreq == fitnessPreference[id]:
+            sum += 1
+
     return sum
+
 
 def initPopulation():
     # list of lists
@@ -37,11 +63,11 @@ def initPopulation():
 
     # 3 hardcoded buildings
     c1 = Chromosome(building1)
-    c1.fitnessVal = fitness(building1)
+    c1.fitnessVal = calculateFitness(building1)
     c2 = Chromosome(building2)
-    c2.fitnessVal = fitness(building2)
+    c2.fitnessVal = calculateFitness(building2)
     c3 = Chromosome(building3)
-    c3.fitnessVal = fitness(building3)
+    c3.fitnessVal = calculateFitness(building3)
     chromosomeList.append(c1)
     chromosomeList.append(c2)
     chromosomeList.append(c3)
@@ -53,7 +79,7 @@ def initPopulation():
         for index in range (0,8):
             randomList.append(random.randrange(1, 6))
         c4 = Chromosome(randomList)
-        c4.fitnessVal = fitness(building3)    
+        c4.fitnessVal = calculateFitness(building3)    
         chromosomeList.append(c4)
     
     return chromosomeList

@@ -1,5 +1,5 @@
 # import the files from everybody
-from initPopulation import initPopulation, fitness
+from initPopulation import initPopulation, calculateFitness
 from ParentSurvivorSelection import selectParents, makeNextGeneration
 
 # chromosome class - one chromosome is an entire building structure
