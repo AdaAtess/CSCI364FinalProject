@@ -55,7 +55,7 @@ def initPopulation():
         for index in range (0,8):
             randomList.append(random.randrange(1, 6))
         c4 = Chromosome(randomList)
-        c4.fitnessVal = calculateFitness(building3)    
+        c4.fitnessVal = calculateFitness(randomList)    
         chromosomeList.append(c4)
     
     return chromosomeList

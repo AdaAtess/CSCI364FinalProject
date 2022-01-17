@@ -25,8 +25,8 @@ def selectParents(population, k, numKids):
     pairs=[]
     while len(pairs) < numKids: #within this loop, pick a pair and add it to the list
         thisPair=[]
-        #tempPop=population.copy()
-        tempPop = copy.deepcopy(population)
+        tempPop=population.copy()
+        # tempPop = copy.deepcopy(population)
         
         for parent in range (2):
             competitors=[]
@@ -42,8 +42,8 @@ def selectParents(population, k, numKids):
             thisPair.append(competitors[0])
 
             #Next two lines only necessary 1st time through, setting up for the 2nd parent so parents in a pair are unique
-            #tempPop=population.copy()
-            tempPop = copy.deepcopy(population)
+            tempPop=population.copy()
+            # tempPop = copy.deepcopy(population)
             tempPop.remove(thisPair[0])
 
         pairs.append(thisPair)
