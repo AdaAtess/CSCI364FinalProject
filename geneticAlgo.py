@@ -16,6 +16,8 @@ class Chromosome:
         # the number representing the module
         # the number identifying the cube it's in (figure out LATER)
 
+moduleIDs = [1,2,3,4,5,6,7,8,9,10]
+fitnessPreference = dict() # preference dict
 archive = []
 population = initPopulation()
 # for pop in population:
