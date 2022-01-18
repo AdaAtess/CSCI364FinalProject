@@ -1,3 +1,5 @@
+# CHANGE THE NUMBER OF MODULES in the MUTATION FUNCTION
+
 # import the files from everybody
 from initPopulation import initPopulation, calculateFitness
 from ParentSurvivorSelection import selectParents, makeNextGeneration
@@ -19,10 +21,16 @@ population = initPopulation()
 #     print(pop.moduleList)
 #     print(pop.fitnessVal)
 
+offspringList = []
 pairsParents = selectParents(population, 4, 3)
 for pair in pairsParents:
     bestChild = crossover(pair[0], pair[1])
-    print(bestChild.fitnessVal)
+    # print(bestChild.fitnessVal)
+    offspringList.append(bestChild)
+
+for child in offspringList:
+    mutatedChild = mutation(child, .15)
+    print(mutatedChild.fitnessVal)
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)
 
