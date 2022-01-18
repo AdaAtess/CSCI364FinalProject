@@ -9,18 +9,15 @@
 # - turret 5
 # - courtyard/pond area 6
 
-# combination of modules
-# ex) 4 cols on one side, wall on the other side
-
 import random
 
 class Chromosome:
     def __init__(self, moduleList):
         # list storing all the module numbers
         self.moduleList = moduleList
-        self.fitnessVal = None  # call fitness function
+        self.fitnessVal = 0  # call fitness function
     def __lt__(self, other):
-        return self.fitnessVal<other.fitnessVal
+        return self.fitnessVal < other.fitnessVal
 
 
 def getPreference(moduleIDs, fitnessPreference):
@@ -42,17 +39,21 @@ def getPreference(moduleIDs, fitnessPreference):
             break
         else:
             inputList = user_input.split()
-            # skip over 'exit'
+
+            # skip over 'exit' and vet format of the input
             if len(inputList) > 1:
-                feature = inputList[0]
-                featureFreq = inputList[1]
+                feature = int(inputList[0])
+                featureFreq = int(inputList[1])
+
                 # check if key exists in moduleIDs list
-                if feature in moduleIDs:
+                if int(feature) in moduleIDs:
+                    del(fitnessPreference[feature])
                     fitnessPreference[feature] = featureFreq  
 
 moduleIDs = [1,2,3,4,5,6,7,8,9,10]
 fitnessPreference = dict() # preference dict
 getPreference(moduleIDs, fitnessPreference)
+print(fitnessPreference)
 
 def calculateFitness(moduleIDs, moduleList, fitnessPreference):    
     sum = 0
@@ -67,28 +68,20 @@ def calculateFitness(moduleIDs, moduleList, fitnessPreference):
         # if idFreq is closer to to the preference, it has higher fitness value
         difference = abs(fitnessPreference[id] - idFreq)
         sum += initialVal - difference
-        print(id)
-        print(sum)
     return sum
 
 
 def initPopulation():
     # list of lists
     chromosomeList = []
-    building1 = [1,1,2,2,5,5,2,2]
-    building2 = [1,1,2,2,3,3,2,2]
-    building3 = [1,1,2,2,5,5,2,2]
-
     # 3 hardcoded buildings
-    c1 = Chromosome(building1)
-    c1.fitnessVal = calculateFitness(moduleIDs, building1, fitnessPreference)
-    c2 = Chromosome(building2)
-    c1.fitnessVal = calculateFitness(moduleIDs, building2, fitnessPreference)
-    c3 = Chromosome(building3)
-    c1.fitnessVal = calculateFitness(moduleIDs, building3, fitnessPreference)
-    chromosomeList.append(c1)
-    chromosomeList.append(c2)
-    chromosomeList.append(c3)
+    buildingsList = [[1,1,2,2,5,5,2,2], [1,1,2,2,3,3,2,2], [1,1,2,2,5,5,2,2]]
+    
+    for building in buildingsList:
+        c1 = Chromosome(building)
+        c1.fitnessVal = calculateFitness(moduleIDs, building, fitnessPreference)
+        # print(c1.fitnessVal)
+        chromosomeList.append(c1)
 
     # 27 randomized buildings
     i = 3
@@ -97,7 +90,8 @@ def initPopulation():
         for index in range (0,8):
             randomList.append(random.randrange(1, 6))
         c4 = Chromosome(randomList)
-        c4.fitnessVal = calculateFitness(moduleIDs, randomList, fitnessPreference)    
+        c4.fitnessVal = calculateFitness(moduleIDs, randomList, fitnessPreference) 
+        # print(c4.fitnessVal)   
         chromosomeList.append(c4)
     
     return chromosomeList
@@ -105,6 +99,7 @@ def initPopulation():
 population = initPopulation()
 # for pop in population:
 #     print(pop.moduleList)
+#     print(pop.fitnessVal)
 
 # def calculateFitness(moduleList):
 #     sum = 0
