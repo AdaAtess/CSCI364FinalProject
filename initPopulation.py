@@ -116,6 +116,7 @@ def createChromosome(self, moduleList, buildingList):
 #             sum += 1
 
 #     return sum
+#   if it gets closer to to the preference, has higher fitness value
 
 
 # def initPopulation():

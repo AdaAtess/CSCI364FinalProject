@@ -39,6 +39,7 @@ for child in crossoverList:
 # print(mutatedList)
 
 # replacing bottom 20 parents with top 20 children, how many per genetation go into the archive
+# archive is one generation behind survivorSelection
 survivorSelection = makeNextGeneration(population, mutatedList, 20, 3)
 for survivor in survivorSelection:
     print(survivor.fitnessVal)
