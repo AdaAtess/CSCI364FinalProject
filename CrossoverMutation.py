@@ -59,7 +59,9 @@ def mutation(offspring, mutrate):
         p = random.random()     #get a probability
         if p < mutrate:         #if lower than mutation rate
             rand_value = random.randrange(1,6)      #choose a random gene/module
-            offspring[index,4] = offspring[index, 4] + rand_value       #add in the middle
+            offspring.moduleList[index,4] = offspring.moduleList[index, 4] + rand_value       #add in the middle
+    off_f = calculateFitness(offspring.moduleList)
+    offspring.fitnessVal = off_f
     return offspring
 
 
