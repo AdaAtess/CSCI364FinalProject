@@ -12,7 +12,7 @@ class Chromosome:
         self.moduleList = moduleList
         self.fitnessVal = 0  # call fitness function
     def __lt__(self, other):
-        return self.fitnessVal<other.fitnessVal
+        return self.fitnessVal < other.fitnessVal
         # the number representing the module
         # the number identifying the cube it's in (figure out LATER)
 
