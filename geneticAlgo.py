@@ -20,31 +20,31 @@ moduleIDs = [1,2,3,4,5,6,7,8,9,10]
 fitnessPreference = dict() # preference dict
 archive = []
 population = initPopulation()
-for pop in population:
-    print(pop.moduleList)
-    print(pop.fitnessVal)
+# for pop in population:
+#     print(pop.moduleList)
+#     print(pop.fitnessVal)
 
-# crossoverList = []
-# # 30 parentPairs, 30 children, use 20 pairs
-# pairsParents = selectParents(population, 4, 30)
-# for pair in pairsParents:
-#     bestChild = crossover(pair[0], pair[1])
-#     # print(bestChild.fitnessVal)
-#     crossoverList.append(bestChild)
-#     # print(crossoverList)
+crossoverList = []
+# 30 parentPairs, 30 children, use 20 pairs
+pairsParents = selectParents(population, 4, 30)
+for pair in pairsParents:
+    bestChild = crossover(pair[0], pair[1])
+    # print(bestChild.fitnessVal)
+    crossoverList.append(bestChild)
+    # print(crossoverList)
 
-# mutatedList = crossoverList.copy()
-# for child in crossoverList:
-#     mutatedChild = mutation(child, .15)
-#     # print(mutatedChild.fitnessVal)
-#     mutatedList.append(mutatedChild)
-# # print(mutatedList)
+mutatedList = crossoverList.copy()
+for child in crossoverList:
+    mutatedChild = mutation(child, .15)
+    # print(mutatedChild.fitnessVal)
+    mutatedList.append(mutatedChild)
+# print(mutatedList)
 
-# # replacing bottom 20 parents with top 20 children, how many per genetation go into the archive
-# # archive is one generation behind survivorSelection
-# survivorSelection = makeNextGeneration(population, mutatedList, 20, 3)
-# for survivor in survivorSelection:
-#     print(survivor.fitnessVal)
+# replacing bottom 20 parents with top 20 children, how many per genetation go into the archive
+# archive is one generation behind survivorSelection
+survivorSelection = makeNextGeneration(population, mutatedList, 20, 3)
+for survivor in survivorSelection:
+    print(survivor.fitnessVal)
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)
 
