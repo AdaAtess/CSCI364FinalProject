@@ -11,7 +11,8 @@ bottomDiameter = 10;
 column(height, bottomDiameter);
 
 // ********* Column Module ***********
-module column(height, bottomDiameter) {
+module column(height) {
+bottomDiameter = height/2
 numFacets = 30;
 topDiameter = bottomDiameter * 3/4;
 hSmallCyl1 = height/50;
