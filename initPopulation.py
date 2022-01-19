@@ -55,7 +55,7 @@ fitnessPreference = dict() # preference dict
 getPreference(moduleIDs, fitnessPreference)
 print(fitnessPreference)
 
-def calculateFitness(moduleList):    
+def calculateFitness(moduleIDs, moduleList, fitnessPreference):    
     sum = 0
     # check freq of each feature in the moduleIDs list
     for id in moduleIDs:
@@ -79,7 +79,7 @@ def initPopulation():
     
     for building in buildingsList:
         c1 = Chromosome(building)
-        c1.fitnessVal = calculateFitness(building)
+        c1.fitnessVal = calculateFitness(moduleIDs, building, fitnessPreference)
         # print(c1.fitnessVal)
         chromosomeList.append(c1)
 
@@ -90,7 +90,7 @@ def initPopulation():
         for index in range (0,8):
             randomList.append(random.randrange(1, 6))
         c4 = Chromosome(randomList)
-        c4.fitnessVal = calculateFitness(randomList) 
+        c4.fitnessVal = calculateFitness(moduleIDs, randomList, fitnessPreference) 
         # print(c4.fitnessVal)   
         chromosomeList.append(c4)
     
