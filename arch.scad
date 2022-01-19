@@ -1,7 +1,9 @@
 $fa = 1;
 $fs = 0.4;
 $fn=64;
+scale([0.16,0.16,0.16]){
 pipebend (10,2,169,44);
+}
 
 module pipebend (thickness, id, od, ang) 
 rotate([0,-90,0]){
@@ -13,6 +15,8 @@ rotate([0,-90,0]){
     wedge (thickness, (od+thickness)/1.7,ang);
     }
  }
+ 
+
 // ********* End of Module ***********
 
 
@@ -53,6 +57,7 @@ top = 6;
 hSmallCyl1 = height/50;
 hSmallCyl2 = height/30;
 
+scale([0.16,0.16,0.16]){
 translate([0,-18,0]){
 stackCylinder([
     [height, bottom, top, numFacets],
@@ -70,7 +75,9 @@ translate([centeringCube, centeringCube, height + + hSmallCyl1 + hSmallCyl2])
     cube(size = [x,y,z]);
 };
 }
+}
 
+scale([0.16,0.16,0.16]){
 translate([0,18,0]){
 stackCylinder([
     [height, bottom, top, numFacets],
@@ -87,4 +94,5 @@ translate([centeringCube, centeringCube, height + + hSmallCyl1 + hSmallCyl2])
 {
     cube(size = [x,y,z]);
 };
+}
 }
