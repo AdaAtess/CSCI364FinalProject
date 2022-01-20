@@ -75,14 +75,6 @@ def initPopulation():
 
     # list of lists
     chromosomeList = []
-    # 3 hardcoded buildings
-    # buildingsList = [[1,1,2,2,5,5,2,2], [1,1,2,2,3,3,2,2], [1,1,2,2,5,5,2,2]]
-    
-    # for building in buildingsList:
-    #     c1 = Chromosome(building)
-    #     c1.fitnessVal = calculateFitness(building)
-    #     # print(c1.fitnessVal)
-    #     chromosomeList.append(c1)
 
     # 30 randomized buildings
     for randBuilding in range(0,30):
