@@ -6,6 +6,7 @@ module bigProgram(x,y,z,mlist) {
          for (xLoc=[0:10:((x-1)*10)]){
         //next line is a weird fix to get around the way variables work in SCAD
         position=(zLoc/10)*x*y+(yLoc/10)*x+xLoc/10;
+        color("LightSkyBlue")
         translate([xLoc,yLoc,zLoc])
         chooseModule(x,y,z,mlist,position);
     }}}
@@ -13,16 +14,57 @@ module bigProgram(x,y,z,mlist) {
 }
 
 //testing code goes here
-bigProgram(3,2,4,[8,9]);
+//bigProgram(2,3,2,[18,18,8,9,10,20,0,0,1,1,19,0]);
+
+//Some of the modules need to be adjusted to fit
+//entirely in the cube and line up with each other
+//I need to add/modify my versions of things with arguments that can vary what they are next to or on top of
 
 module chooseModule(x,y,z,mlist,position){
     value=mlist[position];//get the code for the current cube
     //Remember that position starts at 0
-    if (position<4){
+    cube_size=10;
+    if (value==1){
+        makeFloor(10);}
+    if (value==3){
         makeRoom(10);}
-    else{
+     if (value==4){
+       threeRoomTowardsX(10);}
+     if (value==5){
+         threeRoomTowardsY(10);
+        }  
+     if (value==6){
+         threeRoomAwayX(cube_size);
+        }  
+     if (value==7){
+         threeRoomAwayY(cube_size);
+        } 
+    if (value==8){
+        cornerRoomOrigin(cube_size);
+        }  
+    if (value==9){
+        cornerRoomAlongX(cube_size);
+        }     
+    if (value==10){
+       cornerRoomAlongY(cube_size);
+        }     
+     if (value==11){
+        cornerRoomAlongXandY(cube_size);
+        }     
+     if (value==12){
+        twoRoomAlongX(cube_size);
+        }     
+      
+    if (value==18){
+        translate([5,5,0])
         buildColumn(10);
     }
+    if (value==19){
+        cone_top_turret();}
+    if (value==20){
+        translate([0,5,0])
+        arch();}
+        
 }
 
 module emptyModule() {
