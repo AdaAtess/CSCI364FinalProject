@@ -28,13 +28,13 @@ def getPreference(moduleIDs, fitnessPreference):
     user_input = ""
     while user_input != 'exit':
         instruction = """
-        [1: wall, 2: column, 3: turret, ...]
+        [0: empty, 1: floor, 2: wall, 3: room with 4 walls, ...]
         Please enter a castle feature ID, followed by a space  and its frequency of occurences.
         To exit, enter "exit"
         """
         print(instruction)
 
-        user_input = input()
+        user_input = str(input())
         if (user_input == 'exit'):
             break
         else:
@@ -50,7 +50,7 @@ def getPreference(moduleIDs, fitnessPreference):
                     del(fitnessPreference[feature])
                     fitnessPreference[feature] = featureFreq  
 
-moduleIDs = [1,2,3,4,5,6,7,8,9,10]
+moduleIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 fitnessPreference = dict() # preference dict
 getPreference(moduleIDs, fitnessPreference)
 print(fitnessPreference)
@@ -72,23 +72,32 @@ def calculateFitness(moduleList):
 
 
 def initPopulation():
+    modulesListLen = len(moduleIDs)
+
     # list of lists
     chromosomeList = []
     # 3 hardcoded buildings
-    buildingsList = [[1,1,2,2,5,5,2,2], [1,1,2,2,3,3,2,2], [1,1,2,2,5,5,2,2]]
+    # buildingsList = [[1,1,2,2,5,5,2,2], [1,1,2,2,3,3,2,2], [1,1,2,2,5,5,2,2]]
     
-    for building in buildingsList:
-        c1 = Chromosome(building)
-        c1.fitnessVal = calculateFitness(building)
-        # print(c1.fitnessVal)
-        chromosomeList.append(c1)
+    # for building in buildingsList:
+    #     c1 = Chromosome(building)
+    #     c1.fitnessVal = calculateFitness(building)
+    #     # print(c1.fitnessVal)
+    #     chromosomeList.append(c1)
 
-    # 27 randomized buildings
-    i = 3
-    for randBuilding in range(0,27):
+    # 30 randomized buildings
+    for randBuilding in range(0,30):
         randomList = []
-        for index in range (0,8):
-            randomList.append(random.randrange(1, 6))
+        for index in range (0,modulesListLen*2/3):
+            randomList.append(random.randrange(0, modulesListLen-1))
+        
+        # last 1/3 of the moduleList has 80% chance of getting module 1 (a floor)
+        for index in range (modulesListLen*2/3,modulesListLen):
+            if random.randint(0,100) < 80:
+                randomList.append(1)
+            else:
+                randomList.append(random.randrange(0, modulesListLen-1))
+
         c4 = Chromosome(randomList)
         c4.fitnessVal = calculateFitness(randomList) 
         # print(c4.fitnessVal)   
@@ -97,9 +106,9 @@ def initPopulation():
     return chromosomeList
 
 population = initPopulation()
-# for pop in population:
-#     print(pop.moduleList)
-#     print(pop.fitnessVal)
+for pop in population:
+    print(pop.moduleList)
+    print(pop.fitnessVal)
 
 # def calculateFitness(moduleList):
 #     sum = 0
