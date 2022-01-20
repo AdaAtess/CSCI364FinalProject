@@ -25,8 +25,7 @@ def getPreference(moduleIDs, fitnessPreference):
     for id in moduleIDs:
         fitnessPreference[id] = 0    
     
-    user_input = ""
-    while user_input != 'exit':
+    while True:
         instruction = """
         [0: empty, 1: floor, 2: wall, 3: room with 4 walls, ...]
         Please enter a castle feature ID, followed by a space  and its frequency of occurences.
@@ -34,11 +33,11 @@ def getPreference(moduleIDs, fitnessPreference):
         """
         print(instruction)
 
-        user_input = str(input())
+        user_input = input()
         if (user_input == 'exit'):
             break
         else:
-            inputList = user_input.split()
+            inputList = user_input.split(" ")
 
             # skip over 'exit' and vet format of the input
             if len(inputList) > 1:
@@ -72,7 +71,7 @@ def calculateFitness(moduleList):
 
 
 def initPopulation():
-    modulesListLen = len(moduleIDs)
+    modulesListLen = 5*5*2
 
     # list of lists
     chromosomeList = []
@@ -88,15 +87,16 @@ def initPopulation():
     # 30 randomized buildings
     for randBuilding in range(0,30):
         randomList = []
-        for index in range (0,modulesListLen*2/3):
-            randomList.append(random.randrange(0, modulesListLen-1))
+        for index in range (0, int(modulesListLen*2/3)):
+            # 0-21 (not including 21)
+            randomList.append(random.randrange(0, modulesListLen+1))
         
         # last 1/3 of the moduleList has 80% chance of getting module 1 (a floor)
-        for index in range (modulesListLen*2/3,modulesListLen):
-            if random.randint(0,100) < 80:
+        for index in range (int(modulesListLen*2/3),modulesListLen):
+            if random.randint(0,100) <= 80:
                 randomList.append(1)
             else:
-                randomList.append(random.randrange(0, modulesListLen-1))
+                randomList.append(random.randrange(0, modulesListLen+1))
 
         c4 = Chromosome(randomList)
         c4.fitnessVal = calculateFitness(randomList) 
