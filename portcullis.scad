@@ -1,8 +1,11 @@
 //portcullis scale
 //call function
-scale([0.2,0.2,0.2]){
-portcullis();
-}
+
+rotate([0,-90,0]){
+    scale([0.1,0.1,0.1]){
+        portcullis();
+        }
+    }
 
 //module portcullis to bring all together
 module portcullis() {
