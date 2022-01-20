@@ -1,5 +1,28 @@
-module bigProgram() {
+module bigProgram(x,y,z,mlist) {
+    //Maybe I should store everything in nested lists for the different levels, rows, columns?
+    //or I could make getNeighbor module(s) that help me navigate the list
+    for (zLoc=[0:10:((z-1)*10)]){
+      for (yLoc=[0:10:((y-1)*10)]){
+         for (xLoc=[0:10:((x-1)*10)]){
+        //next line is a weird fix to get around the way variables work in SCAD
+        position=(zLoc/10)*x*y+(yLoc/10)*x+xLoc/10;
+        translate([xLoc,yLoc,zLoc])
+        chooseModule(x,y,z,mlist,position);
+    }}}
     
+}
+
+//testing code goes here
+bigProgram(3,2,4,[8,9]);
+
+module chooseModule(x,y,z,mlist,position){
+    value=mlist[position];//get the code for the current cube
+    //Remember that position starts at 0
+    if (position<4){
+        makeRoom(10);}
+    else{
+        buildColumn(10);
+    }
 }
 
 module emptyModule() {
