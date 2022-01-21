@@ -2,7 +2,7 @@
 
 # import the files from everybody
 from initPopulation import initPopulation, calculateFitness
-from ParentSurvivorSelection import selectParents, makeNextGeneration
+from ParentSurvivorSelection import selectParents, makeNextGeneration, archive
 from CrossoverMutation import crossover, mutation
 
 # chromosome class - one chromosome is an entire building structure
@@ -16,34 +16,45 @@ class Chromosome:
         # the number representing the module
         # the number identifying the cube it's in (figure out LATER)
 
-moduleIDs = [1,2,3,4,5,6,7,8,9,10]
+
+moduleIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 fitnessPreference = dict() # preference dict
-archive = []
+
 population = initPopulation()
 # for pop in population:
 #     print(pop.moduleList)
 #     print(pop.fitnessVal)
 
-crossoverList = []
-# 30 parentPairs, 30 children, use 20 pairs
-pairsParents = selectParents(population, 4, 30)
-for pair in pairsParents:
-    bestChild = crossover(pair[0], pair[1])
-    # print(bestChild.fitnessVal)
-    crossoverList.append(bestChild)
-    # print(crossoverList)
+for i in range(0,100):
+    crossoverList = []
+    # 30 parentPairs, 30 children, use 20 pairs
+    # k-value: how many parents to pick each time
+    pairsParents = selectParents(population, 6, 30)
+    for pair in pairsParents:
+        bestChild = crossover(pair[0], pair[1])
+        # print(bestChild.fitnessVal)
+        crossoverList.append(bestChild)
+        # print(crossoverList)
 
-mutatedList = crossoverList.copy()
-for child in crossoverList:
-    mutatedChild = mutation(child, .15)
-    # print(mutatedChild.fitnessVal)
-    mutatedList.append(mutatedChild)
-# print(mutatedList)
+    mutatedList = crossoverList.copy()
+    for child in crossoverList:
+        mutatedChild = mutation(child, .15)
+        # print(mutatedChild.fitnessVal)
+        mutatedList.append(mutatedChild)
+    # print(mutatedList)
 
-# replacing bottom 20 parents with top 20 children, how many per genetation go into the archive
-# archive is one generation behind survivorSelection
-survivorSelection = makeNextGeneration(population, mutatedList, 20, 3)
-for survivor in survivorSelection:
+    # replacing bottom 20 parents with top 20 children, how many per genetation go into the archive
+    # archive is one generation behind survivorSelection
+    survivorSelection = makeNextGeneration(population, mutatedList, 20, 1)
+
+    for survivor in survivorSelection:
+        print(survivor.moduleList)
+        print(survivor.fitnessVal)
+
+print(len(archive))
+
+for survivor in archive:
+    print(survivor.moduleList)
     print(survivor.fitnessVal)
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)

@@ -19,6 +19,14 @@ class Chromosome:
     def __lt__(self, other):
         return self.fitnessVal < other.fitnessVal
 
+def getBuildingSize():
+    instruction = """
+    Enter a building size.
+    ex) 32 (since 4*4*2 = 32)
+    """
+    print(instruction)
+    dimensions = int(input())
+    return dimensions
 
 def getPreference(moduleIDs, fitnessPreference):
     # initialize dict with 0 freq of occurence
@@ -27,8 +35,15 @@ def getPreference(moduleIDs, fitnessPreference):
     
     while True:
         instruction = """
-        [0: empty, 1: floor, 2: wall, 3: room with 4 walls, ...]
         Please enter a castle feature ID, followed by a space  and its frequency of occurences.
+        ex) 12 1
+
+        [0: empty(), 1: floor(), 2: wall(), 3: room with 4 walls(), 4: threeWallRoomTowardsX(), 5: threeWallRoomTowardsY(), 
+        6: threeWallRoomAwayX(), 7: threeWallRoomAwayY(), 8: cornerRoomOrigin(), 9: cornerRoomAlongX(),
+        10: cornerRoomAlongY(), 11: cornerRoomAlongXandY(), 12: twoWallRoomAlongX(),
+        13: twoWallRoomAlongY(), 14: oneWallRoomX(), 15: oneWallRoomY(), 16: oneWallRoomParallelX().
+        17: oneWallRoomParallelY(), 18: column(), 19: cone_top_turret(), 20: arch()]
+        
         To exit, enter "exit"
         """
         print(instruction)
@@ -50,6 +65,7 @@ def getPreference(moduleIDs, fitnessPreference):
                     fitnessPreference[feature] = featureFreq  
 
 moduleIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+dimensions = getBuildingSize()
 fitnessPreference = dict() # preference dict
 getPreference(moduleIDs, fitnessPreference)
 print(fitnessPreference)
@@ -71,21 +87,31 @@ def calculateFitness(moduleList):
 
 
 def initPopulation():
-    buildingSize = 5*5*2
+    buildingSize = dimensions
+    print("buildingSize:", buildingSize)
 
     # list of lists
     chromosomeList = []
 
+    fiveByFiveByTwo = 5*5*2
+    if dimensions >= fiveByFiveByTwo:
+        lastEmpty = int(buildingSize*2/3)
+        percentEmpty = 80
+    else:
+        lastEmpty = int(buildingSize/2)
+        percentEmpty = 60
+
+
     # 30 randomized buildings
     for randBuilding in range(0,30):
         randomList = []
-        for index in range (0, int(buildingSize*2/3)):
+        for index in range (0, lastEmpty):
             # 0-21 (not including 21)
             randomList.append(random.randrange(0, len(moduleIDs)+1))
         
         # last 1/3 of the moduleList has 80% chance of getting module 1 (a floor)
-        for index in range (int(buildingSize*2/3),buildingSize):
-            if random.randint(0,100) <= 80:
+        for index in range (lastEmpty,buildingSize):
+            if random.randint(0,100) <= percentEmpty:
                 randomList.append(1)
             else:
                 randomList.append(random.randrange(0, len(moduleIDs)+1))
@@ -98,9 +124,9 @@ def initPopulation():
     return chromosomeList
 
 population = initPopulation()
-for pop in population:
-    print(pop.moduleList)
-    print(pop.fitnessVal)
+# for pop in population:
+#     print(pop.moduleList)
+#     print(pop.fitnessVal)
 
 # def calculateFitness(moduleList):
 #     sum = 0

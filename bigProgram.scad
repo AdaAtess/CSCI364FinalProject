@@ -1,5 +1,80 @@
-module bigProgram() {
+module bigProgram(x,y,z,mlist) {
+    //Maybe I should store everything in nested lists for the different levels, rows, columns?
+    //or I could make getNeighbor module(s) that help me navigate the list
+    for (zLoc=[0:10:((z-1)*10)]){
+      for (yLoc=[0:10:((y-1)*10)]){
+         for (xLoc=[0:10:((x-1)*10)]){
+        //next line is a weird fix to get around the way variables work in SCAD
+        position=(zLoc/10)*x*y+(yLoc/10)*x+xLoc/10;
+        color("LightSkyBlue")
+        translate([xLoc,yLoc,zLoc])
+        chooseModule(x,y,z,mlist,position);
+    }}}
     
+}
+
+//testing code goes here
+bigProgram(4,4,2,[19, 21, 0, 18, 10, 13, 2, 7, 21, 17, 8, 15, 18, 10, 18, 19, 11, 2, 5, 1, 17, 21, 19, 3, 1, 1, 1, 17, 11, 17, 8, 5]);
+
+//Some of the modules need to be adjusted to fit
+//entirely in the cube and line up with each other
+//I need to add/modify my versions of things with arguments that can vary what they are next to or on top of
+
+module chooseModule(x,y,z,mlist,position){
+    value=mlist[position];//get the code for the current cube
+    //Remember that position starts at 0
+    cube_size=10;
+    if (value==1){
+        makeFloor(10);}
+    if (value==3){
+        makeRoom(10);}
+     if (value==4){
+       threeRoomTowardsX(10);}
+     if (value==5){
+         threeRoomTowardsY(10);
+        }  
+     if (value==6){
+         threeRoomAwayX(cube_size);
+        }  
+     if (value==7){
+         threeRoomAwayY(cube_size);
+        } 
+    if (value==8){
+        cornerRoomOrigin(cube_size);
+        }  
+    if (value==9){
+        cornerRoomAlongX(cube_size);
+        }     
+    if (value==10){
+       cornerRoomAlongY(cube_size);
+        }     
+     if (value==11){
+        cornerRoomAlongXandY(cube_size);
+        }     
+     if (value==12){
+        twoRoomAlongX(cube_size);
+        }
+    if (value==13){
+        twoRoomAlongY(cube_size);}
+    if (value==14){
+       oneRoomX(cube_size);}
+    if (value==15){
+        oneRoomY(cube_size);} 
+    if (value==16){
+        oneRoomParallelX(cube_size);}
+    if (value==17){
+        oneRoomParallelY(cube_size);}  
+      
+    if (value==18){
+        translate([5,5,0])
+        buildColumn(10);
+    }
+    if (value==19){
+        cone_top_turret();}
+    if (value==20){
+        translate([0,5,0])
+        arch();}
+        
 }
 
 module emptyModule() {
@@ -178,16 +253,16 @@ module oneRoomY(cube_size) {
 module oneRoomParallelX(cube_size) {
     translate([cube_size / 2, cube_size / 2 , 0])
     cube([cube_size, cube_size, 0.5], center = true);
-    translate([cube_size - 1, 0, 0])
-    cube([1, cube_size, cube_size]);  
+    translate([0, cube_size - 1, 0])
+    cube([cube_size, 1, cube_size]); 
 }
 
 module oneRoomParallelY(cube_size) {
     translate([cube_size / 2, cube_size / 2 , 0])
     cube([cube_size, cube_size, 0.5], center = true);
-    translate([0, cube_size - 1, 0])
-    cube([cube_size, 1, cube_size]); 
-}
+    translate([cube_size - 1, 0, 0])
+    cube([1, cube_size, cube_size]); 
+ }
 
 module threeRoomTowardsX(cube_size) {
     translate([cube_size / 2, cube_size / 2, 0])
@@ -260,24 +335,25 @@ module buildColumn(cubeSize) {
 
     // ********* Column Module ***********
     module column(height) {
-        bottomDiameter = height/2.5;
+        bottomDiameter = height/3;
         numFacets = 30;
         topDiameter = bottomDiameter * 3/4;
         hSmallCyl1 = height/50;
         hSmallCyl2 = height/30;
 
+        // flat cube on top
+        x = bottomDiameter;
+        y = x;
+        z = bottomDiameter/6;
+        centeringCube = -x/2;
+
         stackCylinder([
-            [height, bottomDiameter, topDiameter, numFacets],
+            [height - hSmallCyl1 - hSmallCyl2 - z, bottomDiameter, topDiameter, numFacets],
             [hSmallCyl1, topDiameter + 0.5, topDiameter + 0.5, numFacets*3],
             [hSmallCyl2, topDiameter, bottomDiameter, numFacets*3]
         ]);
 
-        // flat cube on top
-        x = bottomDiameter;
-        y = x;
-        z = bottomDiameter/7;
-        centeringCube = -x/2;
-        translate([centeringCube, centeringCube, height + hSmallCyl1 + hSmallCyl2]) 
+        translate([centeringCube, centeringCube, height - z]) 
         {
             cube(size = [x,y,z]);
         };
