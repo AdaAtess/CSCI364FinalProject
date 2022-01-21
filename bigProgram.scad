@@ -14,7 +14,7 @@ module bigProgram(x,y,z,mlist) {
 }
 
 //testing code goes here
-//bigProgram(2,3,2,[18,18,8,9,10,20,0,0,1,1,19,0]);
+// bigProgram(4,4,2,[18,18,8,9,10,20,0,0,1,1,19,0]);
 
 //Some of the modules need to be adjusted to fit
 //entirely in the cube and line up with each other

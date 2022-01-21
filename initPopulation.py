@@ -19,6 +19,14 @@ class Chromosome:
     def __lt__(self, other):
         return self.fitnessVal < other.fitnessVal
 
+def getBuildingSize():
+    instruction = """
+    Enter a building size.
+    ex) 32 (since 4*4*2 = 32)
+    """
+    print(instruction)
+    dimensions = int(input())
+    return dimensions
 
 def getPreference(moduleIDs, fitnessPreference):
     # initialize dict with 0 freq of occurence
@@ -27,12 +35,15 @@ def getPreference(moduleIDs, fitnessPreference):
     
     while True:
         instruction = """
+        Please enter a castle feature ID, followed by a space  and its frequency of occurences.
+        ex) 12 1
+
         [0: empty(), 1: floor(), 2: wall(), 3: room with 4 walls(), 4: threeRoomTowardsX(), 5: threeRoomTowardsY(), 
         6: threeRoomAwayX(), 7: threeRoomAwayY(), 8: cornerRoomOrigin(), 9: cornerRoomAlongX(),
         10: cornerRoomAlongY(), 11: cornerRoomAlongXandY(), 12: twoRoomAlongX(),
         13: twoRoomAlongY(), 14: oneRoomX(), 15: oneRoomY(), 16: oneRoomParallelX().
         17: oneRoomParallelY(), 18: column(), 19: cone_top_turret(), 20: arch()]
-        Please enter a castle feature ID, followed by a space  and its frequency of occurences.
+        
         To exit, enter "exit"
         """
         print(instruction)
@@ -54,6 +65,7 @@ def getPreference(moduleIDs, fitnessPreference):
                     fitnessPreference[feature] = featureFreq  
 
 moduleIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+dimensions = getBuildingSize()
 fitnessPreference = dict() # preference dict
 getPreference(moduleIDs, fitnessPreference)
 print(fitnessPreference)
@@ -75,7 +87,8 @@ def calculateFitness(moduleList):
 
 
 def initPopulation():
-    buildingSize = 5*5*2
+    buildingSize = dimensions
+    print("buildingSize:", buildingSize)
 
     # list of lists
     chromosomeList = []
