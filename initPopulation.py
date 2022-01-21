@@ -99,9 +99,9 @@ def initPopulation():
     return chromosomeList
 
 population = initPopulation()
-for pop in population:
-    print(pop.moduleList)
-    print(pop.fitnessVal)
+# for pop in population:
+#     print(pop.moduleList)
+#     print(pop.fitnessVal)
 
 # def calculateFitness(moduleList):
 #     sum = 0
