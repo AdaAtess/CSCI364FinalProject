@@ -27,7 +27,7 @@ def getPreference(moduleIDs, fitnessPreference):
     
     while True:
         instruction = """
-        [0: empty, 1: floor, 2: wall, 3: room with 4 walls, 4: threeRoomTowardsX(), 5: threeRoomTowardsY(), 
+        [0: empty(), 1: floor(), 2: wall(), 3: room with 4 walls(), 4: threeRoomTowardsX(), 5: threeRoomTowardsY(), 
         6: threeRoomAwayX(), 7: threeRoomAwayY(), 8: cornerRoomOrigin(), 9: cornerRoomAlongX(),
         10: cornerRoomAlongY(), 11: cornerRoomAlongXandY(), 12: twoRoomAlongX(),
         13: twoRoomAlongY(), 14: oneRoomX(), 15: oneRoomY(), 16: oneRoomParallelX().
