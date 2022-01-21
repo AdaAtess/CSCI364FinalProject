@@ -53,7 +53,17 @@ module chooseModule(x,y,z,mlist,position){
         }     
      if (value==12){
         twoRoomAlongX(cube_size);
-        }     
+        }
+    if (value==13){
+        twoRoomAlongY(cube_size);}
+    if (value==14){
+       oneRoomX(cube_size);}
+    if (value==15){
+        oneRoomY(cube_size);} 
+    if (value==16){
+        oneRoomParallelX(cube_size);}
+    if (value==17){
+        oneRoomParallelY(cube_size);}  
       
     if (value==18){
         translate([5,5,0])
