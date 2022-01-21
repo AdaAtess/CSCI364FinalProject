@@ -76,6 +76,7 @@ def initPopulation():
     # list of lists
     chromosomeList = []
 
+
     # 30 randomized buildings
     for randBuilding in range(0,30):
         randomList = []
