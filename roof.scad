@@ -3,12 +3,13 @@
 roof(10);
 
 
-//constant dimensions
-width = 50;    
-depth = 20;   
-roof_height = 10;   
-
+//module for roof
 module roof(cube_size) {
+    //constant dimensions
+    width = 50;    
+    depth = 20;   
+    roof_height = 10;  
+    
     points = [ 
         [0, 0, 0], [width, 0, 0], [width,depth, 0], [0, depth, 0], //rectangle base corners
         [width / 2, 0, roof_height], [width / 2,depth,roof_height]      //roof corners

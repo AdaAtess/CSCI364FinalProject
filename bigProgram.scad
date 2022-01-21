@@ -359,3 +359,176 @@ module buildColumn(cubeSize) {
         };
     }
 }
+
+module portcullis(cube_size) {
+    sca = cube_size/100;
+    rotate([0,-90,0]){
+        scale([sca,sca,sca]){
+            width = 100;
+            height = 100;
+            line = ((width/2) -4) - 16;
+            hline = 6;
+            
+            translate([0,-width/2,0]) vertical_side();
+            translate([0,(width/2)-4,0]) vertical_side();
+            
+            translate([0,line,0]) vertical();
+            translate([0,line - 16,0]) vertical();
+            translate([0,line - 32,0]) vertical();
+            translate([0,line - 48,0]) vertical();
+            translate([0,line - 64,0]) vertical();
+            
+            translate([6,-width/2,0]) bottom_horizontal_front();
+            translate([hline + 12.5,-width/2,0]) horizontal_front();
+            translate([hline + 25,-width/2,0]) horizontal_front();
+            translate([hline + 37.5,-width/2,0]) horizontal_front();
+            translate([hline + 50,-width/2,0]) horizontal_front();
+            translate([hline + 62.5,-width/2,0]) horizontal_front();
+            translate([hline + 75,-width/2,0]) horizontal_front();
+            translate([104.5-15,(-width/2)-4,0]) cube([4,96+12,1.7]);
+            
+            translate([height-11,-width/2+25,0]) hook();
+            translate([height-11,(width/2)-25,0]) hook();
+            
+       }
+   }
+}
+//******** End of Module **********
+
+
+//the bottom horizontal line w extra design on it
+module bottom_horizontal_front() {
+  cube([4,96,1.5]);
+  translate([1,2,0]) cube([2,92,1.7]);
+  translate([2,2,1.3]) cylinder(1,.5,.5, $fn=20);
+  translate([2,2,.9]) cylinder(1,2,2, $fn=20);
+  translate([2,10+3*12.7,.9]) cylinder(1,2,2, $fn=20);
+  translate([2,94,.9]) cylinder(1,2,2, $fn=20);
+  translate([2,94,1.3]) cylinder(1,.5,.5, $fn=20);
+  for (i = [0 : 6]) {
+    if(i != 3) {
+      translate([2,10.5+i*12.5,.9]) cylinder(1,1.5,1.5, $fn=20);
+    }
+    translate([2,10.5+i*12.5,1.3]) cylinder(1,.5,.5, $fn=20);
+    translate([2,10.5-4.2+i*12.5,1.1]) cylinder(1,.5,.5, $fn=20);
+    translate([2,10.5+4.2+i*12.5,1.1]) cylinder(1,.5,.5, $fn=20);
+  }
+}
+//******** End of Module **********
+
+
+//horizontal front lines
+module horizontal_front() {
+  cube([4,96,1.5]);
+  translate([1,2,0]) cube([2,92,1.7]);
+  for (i = [0 : 6]) {
+    translate([2,10.5+i*12.5,1.1]) cylinder(1,.5,.5, $fn=20);
+  }
+}
+//******** End of Module **********
+
+
+//vertical sides with designs on them
+module vertical_side() { 
+  cube([104.5-15,4,1.7]);
+  translate([7,1,0]) cube([104.5-7-15,2,1.9]);
+  for (i = [0 : 5]) {   //small circles on them
+    translate([20.5+i*12.5,2,1.3]) cylinder(1,.5,.5, $fn=20);
+  }
+}
+//******** End of Module **********
+
+
+//vertical lines with triangular end
+module vertical() { 
+  translate([6,0,0]) cube([98.5-15,4,1]);
+  difference() {
+    cube([6,4,1.5]);
+    translate([6,4,-1]) rotate([0,0,atan(2/6)+90]) cube([10,10,5]); //right tan side
+    translate([6,0,-1]) rotate([0,0,90-atan(2/6)+90]) cube([10,10,5]); //left tan side
+    translate([6,0,1.5]) rotate([-atan(1.5/6),0,90]) cube([10,10,5]); //on tan
+  }
+}
+//******** End of Module **********
+
+
+//tiny half circles on top
+module hook() { 
+  scale([1,2,1]) difference() {
+    cylinder(1, 12.5/2, 12.5/2);
+    translate([0,0,-1]) cylinder(4, 8/2, 8/2);
+    translate([-10,-10,-1]) cube([10,20,4]);
+  }
+}
+//******** End of Module **********
+
+
+// Door module that brings together all elements
+module door(cube_size) {
+    // dimensions 
+    height = 20;
+    thick = 1;
+    
+    union(){
+        cube([cube_size, thick, height]);
+        translate([9,0,10]){
+            scale([0.5,0.5,0.5]){
+                handle();
+                round_knob();
+            }
+        }
+    }
+}
+//********* End of Module ***********
+
+
+module round_knob() {
+    translate([0,-2,0])
+        sphere(d=2);
+    rotate([90,0,0])
+        cylinder(d=1, h=2);
+}
+//********* End of Module ***********
+
+
+module handle() {
+    rotate([90,0,0])
+        cylinder(d=1, h=2);
+    translate([0,-2,0]) {
+        rotate([0,-90,0])
+            cylinder(d=1, h=4);
+        sphere(d=1);
+    }
+}
+//********* End of Module ***********
+
+
+module roof(cube_size) {
+    //constant dimensions
+    width = 50;    
+    depth = 20;   
+    roof_height = 10;  
+    
+    points = [ 
+        [0, 0, 0], [width, 0, 0], [width,depth, 0], [0, depth, 0], //rectangle base corners
+        [width / 2, 0, roof_height], [width / 2,depth,roof_height]      //roof corners
+    ];
+    faces = [ 
+        [0, 1, 2, 3],   // base
+        [3, 4, 0],      // left triangle
+        [1, 5, 2],      // right triangle
+        [4, 5, 1, 0],   // front side
+        [5, 4, 3, 2]    // back side
+    ];
+    x = cube_size/width;
+    y = cube_size/depth;
+    z = cube_size/depth;
+    scale([x,y,z]){
+        polyhedron(points, faces, convexity = 10);
+    }
+}
+//******** End of Module ********
+
+
+
+
