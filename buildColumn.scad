@@ -17,19 +17,18 @@ module buildColumn(cubeSize) {
         hSmallCyl1 = height/50;
         hSmallCyl2 = height/30;
 
+        stackCylinder([
+            [height - hSmallCyl1 - hSmallCyl2, bottomDiameter, topDiameter, numFacets],
+            [hSmallCyl1, topDiameter + 0.5, topDiameter + 0.5, numFacets*3],
+            [hSmallCyl2, topDiameter, bottomDiameter, numFacets*3]
+        ]);
+
         // flat cube on top
         x = bottomDiameter;
         y = x;
         z = bottomDiameter/7;
         centeringCube = -x/2;
-
-        stackCylinder([
-            [height - hSmallCyl1 - hSmallCyl2 - z, bottomDiameter, topDiameter, numFacets],
-            [hSmallCyl1, topDiameter + 0.5, topDiameter + 0.5, numFacets*3],
-            [hSmallCyl2, topDiameter, bottomDiameter, numFacets*3]
-        ]);
-
-        translate([centeringCube, centeringCube, height + hSmallCyl1 + hSmallCyl2]) 
+        translate([centeringCube, centeringCube, height]) 
         {
             cube(size = [x,y,z]);
         };

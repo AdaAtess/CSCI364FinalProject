@@ -14,7 +14,7 @@ module bigProgram(x,y,z,mlist) {
 }
 
 //testing code goes here
-// bigProgram(4,4,2,[18,18,8,9,10,20,0,0,1,1,19,0]);
+// bigProgram(4,4,2,[19, 21, 0, 18, 10, 13, 2, 7, 21, 17, 8, 15, 18, 10, 18, 19, 11, 2, 5, 1, 17, 21, 19, 3, 1, 1, 1, 17, 11, 17, 8, 5]);
 
 //Some of the modules need to be adjusted to fit
 //entirely in the cube and line up with each other
@@ -341,19 +341,18 @@ module buildColumn(cubeSize) {
         hSmallCyl1 = height/50;
         hSmallCyl2 = height/30;
 
+        stackCylinder([
+            [height - hSmallCyl1 - hSmallCyl2, bottomDiameter, topDiameter, numFacets],
+            [hSmallCyl1, topDiameter + 0.5, topDiameter + 0.5, numFacets*3],
+            [hSmallCyl2, topDiameter, bottomDiameter, numFacets*3]
+        ]);
+
         // flat cube on top
         x = bottomDiameter;
         y = x;
         z = bottomDiameter/7;
         centeringCube = -x/2;
-
-        stackCylinder([
-            [height - hSmallCyl1 - hSmallCyl2 - z, bottomDiameter, topDiameter, numFacets],
-            [hSmallCyl1, topDiameter + 0.5, topDiameter + 0.5, numFacets*3],
-            [hSmallCyl2, topDiameter, bottomDiameter, numFacets*3]
-        ]);
-
-        translate([centeringCube, centeringCube, height + hSmallCyl1 + hSmallCyl2]) 
+        translate([centeringCube, centeringCube, height]) 
         {
             cube(size = [x,y,z]);
         };
