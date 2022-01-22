@@ -5,35 +5,36 @@ portcullis(10);
 //module portcullis to bring all together
 module portcullis(cube_size) {
     sca = cube_size/100;
-    rotate([0,-90,0]){
-        scale([sca,sca,sca]){
-            width = 100;
-            height = 100;
-            line = ((width/2) -4) - 16;
-            hline = 6;
-            
-            translate([0,-width/2,0]) vertical_side();
-            translate([0,(width/2)-4,0]) vertical_side();
-            
-            translate([0,line,0]) vertical();
-            translate([0,line - 16,0]) vertical();
-            translate([0,line - 32,0]) vertical();
-            translate([0,line - 48,0]) vertical();
-            translate([0,line - 64,0]) vertical();
-            
-            translate([6,-width/2,0]) bottom_horizontal_front();
-            translate([hline + 12.5,-width/2,0]) horizontal_front();
-            translate([hline + 25,-width/2,0]) horizontal_front();
-            translate([hline + 37.5,-width/2,0]) horizontal_front();
-            translate([hline + 50,-width/2,0]) horizontal_front();
-            translate([hline + 62.5,-width/2,0]) horizontal_front();
-            translate([hline + 75,-width/2,0]) horizontal_front();
-            translate([104.5-15,(-width/2)-4,0]) cube([4,96+12,1.7]);
-            
-            translate([height-11,-width/2+25,0]) hook();
-            translate([height-11,(width/2)-25,0]) hook();
-            
-       }
+    translate([0,cube_size-(cube_size/2),0]){
+        rotate([0,-90,0]){
+            scale([sca,sca,sca]){
+                width = 100;
+                height = 100;
+                line = ((width/2) -4) - 16;
+                hline = 6;
+                
+                translate([0,-width/2,0]) vertical_side();
+                translate([0,(width/2)-4,0]) vertical_side();
+                
+                translate([0,line,0]) vertical();
+                translate([0,line - 16,0]) vertical();
+                translate([0,line - 32,0]) vertical();
+                translate([0,line - 48,0]) vertical();
+                translate([0,line - 64,0]) vertical();
+                
+                translate([6,-width/2,0]) bottom_horizontal_front();
+                translate([hline + 12.5,-width/2,0]) horizontal_front();
+                translate([hline + 25,-width/2,0]) horizontal_front();
+                translate([hline + 37.5,-width/2,0]) horizontal_front();
+                translate([hline + 50,-width/2,0]) horizontal_front();
+                translate([hline + 62.5,-width/2,0]) horizontal_front();
+                translate([hline + 75,-width/2,0]) horizontal_front();
+                translate([104.5-15,(-width/2)-4,0]) cube([4,96+12,1.7]);
+                
+                translate([height-11,-width/2+25,0]) hook();
+                translate([height-11,(width/2)-25,0]) hook();
+            }
+      }
    }
 }
 //******** End of Module **********

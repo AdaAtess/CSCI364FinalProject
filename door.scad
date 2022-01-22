@@ -18,8 +18,20 @@ module door(cube_size) {
     union(){
         scale([x, y, z]){
             cube([width, thick, height]);
+            translate([width,0,0]){
+                cube([width, thick, height]);
+            }
+            translate([0,0,0]){
+                cube([width/2, thick, height]);
+            }
+            translate([width/2,-0.1,0]){
+                cube([0.5, thick, height]);
+            }
+            translate([width+width/2,-0.1,0]){
+                cube([0.5, thick, height]);
+            }
         }
-        translate([handlex,handley,handlez]){
+        translate([handlex+(width/2),handley,handlez]){
             scale([sca,sca,sca]){
                 handle();
                 round_knob();
