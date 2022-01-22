@@ -42,7 +42,7 @@ def getPreference(moduleIDs, fitnessPreference):
         6: threeWallRoomAwayX(), 7: threeWallRoomAwayY(), 8: cornerRoomOrigin(), 9: cornerRoomAlongX(),
         10: cornerRoomAlongY(), 11: cornerRoomAlongXandY(), 12: twoWallRoomAlongX(),
         13: twoWallRoomAlongY(), 14: oneWallRoomX(), 15: oneWallRoomY(), 16: oneWallRoomParallelX().
-        17: oneWallRoomParallelY(), 18: column(), 19: cone_top_turret(), 20: arch()]
+        17: oneWallRoomParallelY(), 18: column(), 19: cone_top_turret(), 20: arch(), 21: portcullis(), 22: door(), 23: roof()]
         
         To exit, enter "exit"
         """
@@ -64,7 +64,7 @@ def getPreference(moduleIDs, fitnessPreference):
                     del(fitnessPreference[feature])
                     fitnessPreference[feature] = featureFreq  
 
-moduleIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+moduleIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 dimensions = getBuildingSize()
 fitnessPreference = dict() # preference dict
 getPreference(moduleIDs, fitnessPreference)
