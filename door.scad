@@ -4,14 +4,23 @@ door(10);
 
 // Door module that brings together all elements
 module door(cube_size) {
-    // dimensions 
-    height = 20;
+    // dimensions
+    width = cube_size/2; 
+    height = 10;
     thick = 1;
-    
+    x = 1;
+    y = thick;
+    z = cube_size/10;
+    sca = (cube_size/200)*5; //scaling for handle varying w cube_size
+    handlex = 9*(cube_size/20); //handle translations according to cube_size
+    handley = 0;
+    handlez = 10*(cube_size/20); 
     union(){
-        cube([cube_size, thick, height]);
-        translate([9,0,10]){
-            scale([0.5,0.5,0.5]){
+        scale([x, y, z]){
+            cube([width, thick, height]);
+        }
+        translate([handlex,handley,handlez]){
+            scale([sca,sca,sca]){
                 handle();
                 round_knob();
             }

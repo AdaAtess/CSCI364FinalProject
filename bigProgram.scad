@@ -70,10 +70,21 @@ module chooseModule(x,y,z,mlist,position){
         buildColumn(10);
     }
     if (value==19){
-        cone_top_turret();}
+        cone_top_turret();
+        }
     if (value==20){
         translate([0,5,0])
-        arch();}
+        arch();
+        }
+    if (value==21){
+        portcullis(cube_size);
+    }
+    if (value==22){
+        door(cube_size);
+    }
+    if (value==23){
+        roof(cube_size);
+    }
         
 }
 
@@ -465,14 +476,23 @@ module hook() {
 
 // Door module that brings together all elements
 module door(cube_size) {
-    // dimensions 
-    height = 20;
+    // dimensions
+    width = cube_size/2; 
+    height = 10;
     thick = 1;
-    
+    x = 1;
+    y = thick;
+    z = cube_size/10;
+    sca = (cube_size/200)*5; //scaling for handle varying w cube_size
+    handlex = 9*(cube_size/20); //handle translations according to cube_size
+    handley = 0;
+    handlez = 10*(cube_size/20); 
     union(){
-        cube([cube_size, thick, height]);
-        translate([9,0,10]){
-            scale([0.5,0.5,0.5]){
+        scale([x, y, z]){
+            cube([width, thick, height]);
+        }
+        translate([handlex,handley,handlez]){
+            scale([sca,sca,sca]){
                 handle();
                 round_knob();
             }
@@ -501,6 +521,7 @@ module handle() {
     }
 }
 //********* End of Module ***********
+
 
 
 module roof(cube_size) {
