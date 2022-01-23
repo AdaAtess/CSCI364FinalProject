@@ -43,19 +43,28 @@ for i in range(0,100):
         mutatedList.append(mutatedChild)
     # print(mutatedList)
 
-    # replacing bottom 20 parents with top 20 children, how many per genetation go into the archive
+    # replacing bottom 20 parents with top 20 children, how many per generation go into the archive
     # archive is one generation behind survivorSelection
     survivorSelection = makeNextGeneration(population, mutatedList, 20, 1)
 
-    for survivor in survivorSelection:
-        print(survivor.moduleList)
-        print(survivor.fitnessVal)
+    #for survivor in survivorSelection:
+        #print(survivor.moduleList)
+        #print(survivor.fitnessVal)
 
-print(len(archive))
+#print(len(archive))
 
-for survivor in archive:
-    print(survivor.moduleList)
-    print(survivor.fitnessVal)
+
+#for survivor in archive:
+    #print(survivor.moduleList)
+    #print(survivor.fitnessVal)
+
+archive.sort()
+print("Top Results from the Archive: ")
+print()
+for i in range(3):
+    print(archive[i].moduleList)
+
+
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)
 
