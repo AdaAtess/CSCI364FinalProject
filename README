@@ -1,0 +1,4 @@
+How to run code:
+-Each OpenSCAD file contains one or more modules that can be run separately as functions to model building features
+-[genetic algorithm]
+-You can then use bigProgram to model the output from the genetic algorithm
