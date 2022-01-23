@@ -68,7 +68,7 @@ moduleIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 dimensions = getBuildingSize()
 fitnessPreference = dict() # preference dict
 getPreference(moduleIDs, fitnessPreference)
-print(fitnessPreference)
+#print(fitnessPreference)
 
 def calculateFitness(moduleList):    
     sum = 0
@@ -88,7 +88,7 @@ def calculateFitness(moduleList):
 
 def initPopulation():
     buildingSize = dimensions
-    print("buildingSize:", buildingSize)
+    #print("buildingSize:", buildingSize)
 
     # list of lists
     chromosomeList = []

@@ -1,4 +1,5 @@
 How to run code:
 -Each OpenSCAD file contains one or more modules that can be run separately as functions to model building features
--[genetic algorithm]
+-Run "python3 geneticAlgo.py" in the terminal and then the program will ask the user a few questions about 
+building size, features, and preferred frequencies of features. Then press exit to generate a building.
 -You can then use bigProgram to model the output from the genetic algorithm
