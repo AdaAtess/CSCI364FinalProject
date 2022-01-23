@@ -59,11 +59,18 @@ for i in range(0,100):
     #print(survivor.fitnessVal)
 
 archive.sort()
-print("Top Results from the Archive: ")
 print()
-for i in range(3):
+print("Top Result from the Archive: ")
+print()
+for i in range(1):
     print(archive[i].moduleList)
 
+
+print()
+print("Survivors: ")
+print()
+for survivor in survivorSelection:
+    print(survivor.moduleList)
 
 
 # main function (call genetic algorithm functions) (paramenters: receive input to use for fitness function)
