@@ -107,14 +107,14 @@ def initPopulation():
         randomList = []
         for index in range (0, lastEmpty):
             # 0-21 (not including 21)
-            randomList.append(random.randrange(0, len(moduleIDs)+1))
+            randomList.append(random.randrange(0, len(moduleIDs)))
         
         # last 1/3 of the moduleList has 80% chance of getting module 1 (a floor)
         for index in range (lastEmpty,buildingSize):
             if random.randint(0,100) <= percentEmpty:
                 randomList.append(1)
             else:
-                randomList.append(random.randrange(0, len(moduleIDs)+1))
+                randomList.append(random.randrange(0, len(moduleIDs)))
 
         c4 = Chromosome(randomList)
         c4.fitnessVal = calculateFitness(randomList) 
