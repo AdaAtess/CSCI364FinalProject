@@ -65,7 +65,10 @@ module chooseModule(x,y,z,mlist,position){
     if (value==17){
         oneRoomParallelY(cube_size);}  
       
-    if (value==18){
+if (value==18){
+        if(position>((len(mlist))/z)){
+            makeFloor(10);
+        }
         translate([5,5,0])
         buildColumn(10);
     }
