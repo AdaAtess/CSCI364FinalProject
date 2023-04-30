@@ -1,3 +1,5 @@
+This project is designed to generate 3D models of buildings based on user preferences. The aim is to help generate earthquake-safe building models in the future based on user preferences.
+
 How to run code:
 -Each OpenSCAD file contains one or more modules that can be run separately as functions to model building features
 -Run "python3 geneticAlgo.py" in the terminal and then the program will ask the user a few questions about 
